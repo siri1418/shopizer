@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage ('vcs') {
             steps {
-                 branch: 'develop',git url: 'https://github.com/siri1418/shopizer.git'
+                git branch: 'develop',url: 'https://github.com/siri1418/shopizer.git'
             }
         }
         stage ('build') {
@@ -15,8 +15,9 @@ pipeline {
     stage ('test results formatted') {
         steps {
             junit '**/surefire-reports/*.xml'
-        }
-    
+        } 
+            }
+
     }
-    
+
 }
