@@ -1,0 +1,23 @@
+pipe {
+    agent {label'u1'}
+   triggers { pollSCM('* * * * *') }
+    stages {
+        stage('vcs') {
+            steps {
+                git branch: 'develop',url: 'https://github.com/siri1418/shopizer.git'
+            }
+        }
+    }
+    stage('build') {
+        steps {
+            sh '/usr/share/maven/bin/mvn package'  
+        }
+    }
+    stage('archieve results') {
+        steps {
+            junit '**/surefire-reports/*.xml'
+        }
+    
+    }
+    
+}
