@@ -1,19 +1,19 @@
-pipe {
-    agent {label'u1'}
+pipeline {
+    agent { label 'u1' }
    triggers { pollSCM('* * * * *') }
     stages {
-        stage('vcs') {
+        stage ('vcs') {
             steps {
-                git branch: 'develop',url: 'https://github.com/siri1418/shopizer.git'
+                 branch: 'develop',git url: 'https://github.com/siri1418/shopizer.git'
             }
         }
     }
-    stage('build') {
+    stage ('build') {
         steps {
-            sh '/usr/share/maven/bin/mvn package'  
+            sh 'mvn package'  
         }
     }
-    stage('archieve results') {
+    stage ('archieve results') {
         steps {
             junit '**/surefire-reports/*.xml'
         }
